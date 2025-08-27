@@ -1,0 +1,21 @@
+name: Reality VPN
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # كل 6 ساعات
+  workflow_dispatch:       # تشغيل يدوي
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Reality VPN
+      run: |
+        sudo apt update
+        sudo apt install -y curl unzip
+        curl -L -O https://example.com/reality-vpn.zip
+        unzip reality-vpn.zip -d /vpn
+        chmod +x /vpn/reality-vpn
+        echo "تشغيل الكونفج"
+        /vpn/reality-vpn -config /vpn/config.json
