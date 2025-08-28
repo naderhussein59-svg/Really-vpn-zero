@@ -1,11 +1,6 @@
-FROM alpine:latest
+FROM ubuntu:20.04
 
-RUN apk add --no-cache curl bash
+RUN apt update && apt install -y curl gnupg
+RUN curl -s https://install.zerotier.com | bash
 
-WORKDIR /app
-
-COPY entrypoint.sh .
-
-RUN chmod +x entrypoint.sh
-
-CMD ["./entrypoint.sh"]
+CMD zerotier-cli join <Network-ID> && tail -f /dev/null
